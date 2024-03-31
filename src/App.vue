@@ -1,26 +1,57 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+ <div class="mt-4">
+  <h1 class="text-white text-center">The Quizz</h1>
+ <QaOne v-show="one" />
+ <QaTwo v-show="two" />
+ <QaThree v-show="three" />
+
+ 
+
+ <div class="mt-2 w-50 m-auto ">
+        <button v-show="mybtn" @click="myfunc()" type="button" class="btn btn-success btn-sm text-uppercase">
+          next question
+        </button>
+</div>
+ <ResultPage v-show="result" /> 
+</div>
 </template>
 
-<script>
-import HelloWorld from './components/HelloWorld.vue'
+<script setup>
+ import QaOne from './components/QaOne.vue'
+ import QaTwo from './components/QaTwo.vue'
+ import QaThree from './components/QaThree.vue'
+ import ResultPage from './components/ResultPage.vue';
+ import {ref} from 'vue';
+ 
 
-export default {
-  name: 'App',
-  components: {
-    HelloWorld
+let one = ref(true);
+let two = ref(false);
+let three = ref(false);
+let result = ref(false);
+let mybtn = ref(true);
+
+function myfunc() {
+  if(one.value == true)
+  {
+    one.value = false;
+    two.value=true
+  }
+  else if(two.value == true){
+  two.value = false;
+  three.value=true;
+ } 
+ else{
+  three.value=false;
+  mybtn.value = false;
+  result.value = true;
+
   }
 }
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body{
+  background-color: black;
 }
+
 </style>
